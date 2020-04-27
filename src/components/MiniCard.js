@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 
-const MiniCard = () => {
+const MiniCard = (props) => {
     return(
         <View style={{
             flexDirection:"row",
@@ -9,7 +9,7 @@ const MiniCard = () => {
             marginBottom:0
         }}>
             <Image 
-            source={{uri:"https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"}}
+            source={{uri:`https://i.ytimg.com/vi/${props.videoId}/maxresdefault.jpg`}}
             style={{
                 width:"45%",
                 height:100
@@ -24,10 +24,10 @@ const MiniCard = () => {
                 }}
                 ellipsizeMode="tail"
                 numberOfLines={3}
-                >The moon is beautiful isn't?</Text>
+                >{props.title}</Text>
                 <Text style={{
                     fontSize:12
-                }}>Natsume Soseki</Text>
+                }}>{props.channel}</Text>
             </View>
         </View>
     )
