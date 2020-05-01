@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, FlatList, ActivityIndicator } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import MiniCard from '../components/MiniCard';
+import Constant from 'expo-constants';
 
 const SearchScreen = () => {
     const [value,setValue] = useState("")
@@ -18,7 +19,8 @@ const SearchScreen = () => {
     }
     return(
         <View style={{
-            flex:1
+            flex:1,
+            marginTop: Constant.statusBarHeight
             }}>
             <View style={{
                 padding:5,
