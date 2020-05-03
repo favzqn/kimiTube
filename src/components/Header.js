@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {AntDesign,Ionicons,MaterialIcons} from '@expo/vector-icons';
+import {useNavigation} from '@react-navigation/native';
 import Constant from 'expo-constants';
 
 export default function Header() {
+    const navigation = useNavigation()
     const myColor = "#212121"
   return (
     <View style={{
@@ -38,7 +40,8 @@ export default function Header() {
           margin:5
       }}>
         <Ionicons name="md-videocam" size={32} color={myColor}/>
-        <Ionicons name="md-search" size={32} color={myColor}/>
+        <Ionicons name="md-search" size={32} color={myColor}
+        onPress={()=>navigation.navigate("search")}/>
         <MaterialIcons name="account-circle" size={32} color={myColor}/>
       </View>
     </View>

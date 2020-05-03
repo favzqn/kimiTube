@@ -9,16 +9,38 @@ import Search from './src/screens/Search';
 import VideoPlayer from './src/screens/VideoPlayer';
 import Explore from './src/screens/Explore';
 import Subscribe from './src/screens/Subscribe';
+import {MaterialIcons} from '@expo/vector-icons';
 
 const stack = createStackNavigator()
 const tabs = createBottomTabNavigator()
 
 const RootHome = () => {
   return(
-    <tabs.Navigator>
-      <tabs.Screen name="home" component={Home}/>
-      <tabs.Screen name="explore" component={Explore}/>
-      <tabs.Screen name="subscribe" component={Subscribe}/>
+    <tabs.Navigator
+    
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ color }) => {
+        let iconName;
+
+        if (route.name === 'Home') {
+          iconName = 'home';
+        } else if (route.name === 'Explore') {
+          iconName = 'explore';
+        } else if (route.name === 'Subscribe'){
+          iconName = 'subscriptions';
+        }
+
+        // You can return any component that you like here!
+        return <MaterialIcons name={iconName} size={25} color={color} />;
+      },
+    })}
+    tabBarOptions={{
+      activeTintColor: 'red',
+      inactiveTintColor: 'gray',
+    }}>
+      <tabs.Screen name="Home" component={Home}/>
+      <tabs.Screen name="Explore" component={Explore}/>
+      <tabs.Screen name="Subscribe" component={Subscribe}/>
     </tabs.Navigator>
   )
 }
@@ -26,11 +48,11 @@ const RootHome = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <stack.Navigatore headerMode="none">
+      <stack.Navigator headerMode="none">
         <stack.Screen name="rootHome" component={RootHome}/>
         <stack.Screen name="search" component={Search}/>
         <stack.Screen name="videoPlayer" component={VideoPlayer}/>
-      </stack.Navigatore>
+      </stack.Navigator>
     </NavigationContainer>
   );
 }

@@ -4,7 +4,7 @@ import {Ionicons} from '@expo/vector-icons';
 import MiniCard from '../components/MiniCard';
 import Constant from 'expo-constants';
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
     const [value,setValue] = useState("")
     const [miniCardData, setMiniCard] = useState([])
     const [loading,setLoading] = useState(false)
@@ -29,7 +29,8 @@ const SearchScreen = () => {
                 elevation:5,
                 backgroundColor:"white"
             }}>
-                <Ionicons name="md-arrow-back" size={32} 
+                <Ionicons name="md-arrow-back" size={32}
+                onPress={()=>navigation.goBack()} 
                 />
                 <TextInput 
                 style={{
