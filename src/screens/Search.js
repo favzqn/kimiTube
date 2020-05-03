@@ -21,6 +21,7 @@ const SearchScreen = ({navigation}) => {
             setLoading(false)
             // setMiniCard(data.items)
             dispatch({type:"add",payload:data.items})
+            console.log(data)
         })
     }
     return(

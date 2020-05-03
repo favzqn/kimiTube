@@ -2,13 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import {AntDesign,Ionicons,MaterialIcons} from '@expo/vector-icons';
 
-const Card = () => {
+const Card = (props) => {
     return(
         <View style={{
             marginBottom:10
         }}>
             <Image 
-            source={{uri:"https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"}}
+            source={{uri:`https://i.ytimg.com/vi/${props.videoId}/hqdefault.jpg`}}
             style={{
                 width:"100%",
                 height:200
@@ -28,8 +28,8 @@ const Card = () => {
                     }}
                     ellipsizeMode="tail"
                     numberOfLines={2}
-                    >The moon is beautiful isn't?</Text>
-                    <Text>Natsume Soseki</Text>
+                    >{props.title}</Text>
+                    <Text>{props.channel}</Text>
                 </View>
             </View>
         </View>
