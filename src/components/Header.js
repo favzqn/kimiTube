@@ -3,10 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import {AntDesign,Ionicons,MaterialIcons} from '@expo/vector-icons';
 import {useNavigation, useTheme} from '@react-navigation/native';
 import Constant from 'expo-constants';
+import {useDispatch,useSelector} from 'react-redux'
 
 export default function Header() {
     const navigation = useNavigation()
+    const dispatch = useDispatch()
     const {colors} =  useTheme()
+    const currentTheme = useSelector(state=>{
+      return state.myDarkMode
+    })
     const myColor = colors.iconColor
   return (
     <View style={{
@@ -43,7 +48,8 @@ export default function Header() {
         <Ionicons name="md-videocam" size={32} color={myColor}/>
         <Ionicons name="md-search" size={32} color={myColor}
         onPress={()=>navigation.navigate("search")}/>
-        <MaterialIcons name="account-circle" size={32} color={myColor}/>
+        <MaterialIcons name="account-circle" size={32} color={myColor}
+        onPress={()=>dispatch({type:"change_theme",payload:!currentTheme})}/>
       </View>
     </View>
   );

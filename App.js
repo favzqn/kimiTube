@@ -10,9 +10,10 @@ import VideoPlayer from './src/screens/VideoPlayer';
 import Explore from './src/screens/Explore';
 import Subscribe from './src/screens/Subscribe';
 import {MaterialIcons} from '@expo/vector-icons';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {Provider, useSelector} from 'react-redux';
+import {createStore, combineReducers} from 'redux';
 import {reducer} from './src/reducer/reducer';
+import {themeReducer} from './src/reducer/themeReducer';
 
 const customDarkTheme = {
   ...DarkTheme,
@@ -32,7 +33,12 @@ const customDefaultTheme = {
     tabIcon:"red"
   }
 }
-const store = createStore(reducer)
+
+const rootReducer = combineReducers({
+  cardData:reducer, // []
+  myDarkMode:themeReducer //false
+})
+const store = createStore(rootReducer)
 const stack = createStackNavigator()
 const tabs = createBottomTabNavigator()
 
@@ -68,16 +74,25 @@ const RootHome = () => {
   )
 }
 
-export default function App() {
-  return (
+export default App = () => {
+  return(
     <Provider store={store}>
-    <NavigationContainer theme={customDarkTheme}>
+    <Navigation />
+  </Provider>
+  )
+}
+
+export function Navigation() {
+  let currentTheme  = useSelector(state=>{
+    return state.myDarkMode
+  })
+  return (
+    <NavigationContainer theme={currentTheme ? customDarkTheme : customDefaultTheme}>
       <stack.Navigator headerMode="none">
         <stack.Screen name="rootHome" component={RootHome}/>
         <stack.Screen name="search" component={Search}/>
         <stack.Screen name="videoPlayer" component={VideoPlayer}/>
       </stack.Navigator>
     </NavigationContainer>
-    </Provider>
   );
 }
