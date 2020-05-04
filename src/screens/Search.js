@@ -3,9 +3,12 @@ import { StyleSheet, Text, View, ScrollView, TextInput, FlatList, ActivityIndica
 import {Ionicons} from '@expo/vector-icons';
 import MiniCard from '../components/MiniCard';
 import Constant from 'expo-constants';
+import {useTheme} from '@react-navigation/native'
 import {useSelector,useDispatch} from 'react-redux';
 
 const SearchScreen = ({navigation}) => {
+    const {colors} =  useTheme()
+    const myColor = colors.iconColor
     const [value,setValue] = useState("")
     // const [miniCardData, setMiniCard] = useState([])
     const dispatch = useDispatch()
@@ -33,9 +36,12 @@ const SearchScreen = ({navigation}) => {
                 flexDirection:"row",
                 justifyContent:"space-around",
                 elevation:5,
-                backgroundColor:"white"
+                backgroundColor:colors.headerColor
             }}>
-                <Ionicons name="md-arrow-back" size={32}
+                <Ionicons style={{
+                    color:myColor
+                }} 
+                name="md-arrow-back" size={32}
                 onPress={()=>navigation.goBack()} 
                 />
                 <TextInput 
@@ -46,7 +52,9 @@ const SearchScreen = ({navigation}) => {
                 value={value}
                 onChangeText={(text)=>setValue(text)}
                 />
-                <Ionicons 
+                <Ionicons style={{
+                    color:myColor
+                }} 
                 name="md-send"
                 size={32}
                 onPress={()=>fetchData()}/>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {NavigationContainer, StackActions} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme, DarkTheme, useTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Constant from 'expo-constants';
@@ -14,11 +14,30 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import {reducer} from './src/reducer/reducer';
 
+const customDarkTheme = {
+  ...DarkTheme,
+  colors:{
+    ...DarkTheme.colors,
+    headerColor:"#404040",
+    iconColor:"white",
+    tabIcon:"white"
+  }
+}
+const customDefaultTheme = {
+  ...DefaultTheme,
+  colors:{
+    ...DefaultTheme.colors,
+    headerColor:"white",
+    iconColor:"black",
+    tabIcon:"red"
+  }
+}
 const store = createStore(reducer)
 const stack = createStackNavigator()
 const tabs = createBottomTabNavigator()
 
 const RootHome = () => {
+  const {colors} = useTheme()
   return(
     <tabs.Navigator
     
@@ -39,7 +58,7 @@ const RootHome = () => {
       },
     })}
     tabBarOptions={{
-      activeTintColor: 'red',
+      activeTintColor: colors.tabIcon,
       inactiveTintColor: 'gray',
     }}>
       <tabs.Screen name="Home" component={Home}/>
@@ -52,7 +71,7 @@ const RootHome = () => {
 export default function App() {
   return (
     <Provider store={store}>
-    <NavigationContainer>
+    <NavigationContainer theme={customDarkTheme}>
       <stack.Navigator headerMode="none">
         <stack.Screen name="rootHome" component={RootHome}/>
         <stack.Screen name="search" component={Search}/>
