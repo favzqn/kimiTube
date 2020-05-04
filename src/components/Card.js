@@ -1,12 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
-import {AntDesign,Ionicons,MaterialIcons} from '@expo/vector-icons';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
+import {MaterialIcons} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const Card = (props) => {
+    const navigation = useNavigation();
     return(
+        <TouchableOpacity
+        onPress={()=>navigation.navigate("videoPlayer",{videoId:props.videoId,title:props.title})}>
         <View style={{
             marginBottom:10
-        }}>
+        }}
+        >
             <Image 
             source={{uri:`https://i.ytimg.com/vi/${props.videoId}/hqdefault.jpg`}}
             style={{
@@ -33,6 +38,7 @@ const Card = (props) => {
                 </View>
             </View>
         </View>
+        </TouchableOpacity>
     )
 }
 

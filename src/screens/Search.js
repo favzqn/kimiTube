@@ -15,13 +15,12 @@ const SearchScreen = ({navigation}) => {
     const [loading,setLoading] = useState(false)
     const fetchData = () => {
         setLoading(true)
-        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=AIzaSyAeUQc-6S2x-Nmw9kH6wnakQycrnZxUw34`)
+        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=AIzaSyAgauOaFDOmavLelNq0UNJ8PpVYAR61nkQ`)
         .then(res=>res.json())
         .then(data=>{
             setLoading(false)
             // setMiniCard(data.items)
             dispatch({type:"add",payload:data.items})
-            console.log(data)
         })
     }
     return(
